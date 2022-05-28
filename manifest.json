@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+  "name": "Password Generator",
+  "short_name": "Pass Gen",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "fullscreen",
+  "background_color": "#fff",
+  "theme_color": "#000",
+  "description": "This is a simple offline Password Generator",
+  "icons": [{
+      "src": "icons/apple-icon-57x57.png",
+      "sizes": "57x57",
+      "type": "image/png"
+  }, {
+      "src": "icons/apple-icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+  }, {
+      "src": "icons/favicon-96x96.png ",
+      "sizes": "96x96",
+      "type": "image/png"
+  }, {
+      "src": "icons/apple-icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+  }, {
+      "src": "icons/android-icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+  }, {
+      "src": "icons/512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+  },{
+      "src": "icons/apple-icon-57x57.avif",
+      "sizes": "57x57",
+      "type": "image/avif"
+  }, {
+      "src": "icons/apple-icon-72x72.avif",
+      "sizes": "72x72",
+      "type": "image/avif"
+  }, {
+      "src": "icons/favicon-96x96.avif ",
+      "sizes": "96x96",
+      "type": "image/avif"
+  }, {
+      "src": "icons/apple-icon-144x144.avif",
+      "sizes": "144x144",
+      "type": "image/avif"
+  }, {
+      "src": "icons/android-icon-192x192.avif",
+      "sizes": "192x192",
+      "type": "image/avif",
+      "purpose": "any maskable"
+  }, {
+      "src": "icons/512x512.avif",
+      "sizes": "512x512",
+      "type": "image/avif"
+  }]
+}
