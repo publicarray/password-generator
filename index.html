@@ -43,13 +43,18 @@
         <input type="number" name="length" id="length" min="1" value="20" max="999999">
     </form>
     <h2 id="out"></h2>
+    <form action="" method="get" oninput="startWords()">
+        <label for="words">Number of Words</label>
+        <input type="number" name="words" id="words" min="1" value="4" max="99">
+    </form>
+    <h2 id="wordsOut"></h2>
     <script>
         const d = document
         const alpha = "abcdefghijklmnopqrstovwxyz"
         const alphaUpper = "ABCDEFGHIJKLMNOPQRSTOVWXYZ"
         const num = "0123456789"
         const specialStr = "~!@#$%^&*()_+-={}[]|;':\",./<>?\\`"
-
+        const dictionary = []
         // check url parameter and set defaults
         const { searchParams } = new URL(d.URL)
         if (searchParams.has('numbers')) {
@@ -63,6 +68,10 @@
         if (searchParams.has('length')) {
             d.getElementById('length').value = searchParams.get('length')
         }
+        if (searchParams.has('words')) {
+            d.getElementById('words').value = searchParams.get('words')
+        }
+
 
         function start() {
             let numbers = d.getElementById('numbers').checked
@@ -75,6 +84,26 @@
             searchParams.set('numbers', d.getElementById('numbers').checked)
             searchParams.set('special', d.getElementById('special').checked)
             searchParams.set('length', d.getElementById('length').value)
+            history.replaceState(null, '', `${location.pathname}?${searchParams}`)
+        }
+
+        function startWords() {
+            let password = ""
+            let numOfWords = d.getElementById('words').value
+            let out = d.getElementById('wordsOut')
+            getDictionary()
+            for (let i = 0; i < numOfWords; i++) {
+                let randomNumber = Math.floor(Math.random() * dictionary.length)
+                if (i == numOfWords-1) {
+                    password += dictionary[randomNumber]
+                } else {
+                    password += dictionary[randomNumber] + "-"
+                }
+            }
+            out.innerText = password
+
+            // Update URL parameters
+            searchParams.set('words', d.getElementById('words').value)
             history.replaceState(null, '', `${location.pathname}?${searchParams}`)
         }
 
@@ -104,7 +133,17 @@
             return password
         }
 
+        function getDictionary() {
+            // https://eff.org/dice
+            // wget https://www.eff.org/files/2016/07/18/eff_large_wordlist.txt
+            // cat eff_large_wordlist.txt | awk '{print $2}' > eff.txt
+            fetch('eff.txt')
+                .then(response => response.body())
+                .then(data => dictionary = data.split('\n'))
+        }
+
         start()
+        startWords()
     </script>
 
 </body>
