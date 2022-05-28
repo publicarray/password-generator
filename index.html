@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+</head>
+<body>
+    <form action="" method="get" oninput="start()">
+        <label for="numbers">Numbers</label>
+        <input type="checkbox" name="numbers" id="numbers" checked>
+        <label for="special">Special</label>
+        <input type="checkbox" name="special" id="special">
+        <label for="length">Length</label>
+        <input type="number" name="length" id="length" min="1" value="20">
+    </form>
+    <h2 id="out"></h2>
+    <script>
+        const docGetById = document.getElementById
+        const alpha = "abcdefghijklmnopqrstovwxyz"
+        const alphaUpper = "ABCDEFGHIJKLMNOPQRSTOVWXYZ"
+        const num = "0123456789"
+        const specialStr = "~!@#$%^&*()_+-={}[]|;':\",./<>?\\`"
+
+        // check url parameter and set defaults
+        const { searchParams } = new URL(document.URL)
+        if (searchParams.has('numbers')) {
+            let value = searchParams.get('numbers').toLowerCase() == 'true' ? true : false;
+            docGetById('numbers').checked = value
+        }
+        if (searchParams.has('special')) {
+            let value = searchParams.get('special').toLowerCase() == 'true' ? true : false;
+            docGetById('special').checked = value
+        }
+        if (searchParams.has('length')) {
+            docGetById('length').value = searchParams.get('length')
+        }
+
+        function start() {
+            let numbers = docGetById('numbers').checked
+            let special = docGetById('special').checked
+            let length = docGetById('length').value
+            let out = docGetById('out')
+            out.innerText  = genPassword(numbers, special, length)
+
+            // Update URL parameters
+            searchParams.set('numbers', docGetById('numbers').checked)
+            searchParams.set('special', docGetById('special').checked)
+            searchParams.set('length', docGetById('length').value)
+            history.replaceState(null, '', `${location.pathname}?${searchParams}`)
+        }
+
+        function randomChar (searchSpace) {
+            // const max32bit = 0xffffffff
+            const randomness = new Uint32Array(1)
+            crypto.getRandomValues(randomness)
+
+            // let randomNumber = Math.floor(Math.random() * searchSpace.length)
+            let randomNumber = Math.floor(('0.' + randomness[0]) * searchSpace.length)
+            // let randomNumber = Math.floor((randomness[0] / (max32bit +1)) * searchSpace.length)
+            return searchSpace[randomNumber]
+        }
+
+        function genPassword(numbers, special, length) {
+            let password = ""
+            let searchSpace = alpha + alphaUpper
+            if (numbers) {
+                searchSpace += num
+            }
+            if (special) {
+                searchSpace += specialStr
+            }
+            for (let i = 0; i < length; i++) {
+                password += randomChar(searchSpace)
+            }
+            return password
+        }
+
+        start()
+    </script>
+
+</body>
+</html>
