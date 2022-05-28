@@ -27,6 +27,10 @@
             color: var(--font-color);
             transition: color ease 0.5s, background ease 0.5s;
         }
+
+        #out {
+            overflow-wrap: anywhere;
+        }
     </style>
 </head>
 <body>
@@ -36,7 +40,7 @@
         <label for="special">Special</label>
         <input type="checkbox" name="special" id="special">
         <label for="length">Length</label>
-        <input type="number" name="length" id="length" min="1" value="20">
+        <input type="number" name="length" id="length" min="1" value="20" max="999999">
     </form>
     <h2 id="out"></h2>
     <script>
@@ -76,11 +80,11 @@
 
         function randomChar (searchSpace) {
             // const max32bit = 0xffffffff
-            const randomness = new Uint32Array(1)
-            crypto.getRandomValues(randomness)
+            // const randomness = new Uint32Array(1)
+            // crypto.getRandomValues(randomness)
 
-            // let randomNumber = Math.floor(Math.random() * searchSpace.length)
-            let randomNumber = Math.floor(('0.' + randomness[0]) * searchSpace.length)
+            let randomNumber = Math.floor(Math.random() * searchSpace.length)
+            // let randomNumber = Math.floor(('0.' + randomness[0]) * searchSpace.length)
             // let randomNumber = Math.floor((randomness[0] / (max32bit +1)) * searchSpace.length)
             return searchSpace[randomNumber]
         }
