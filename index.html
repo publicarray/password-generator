@@ -91,16 +91,18 @@
             let password = ""
             let numOfWords = d.getElementById('words').value
             let out = d.getElementById('wordsOut')
-            getDictionary()
-            for (let i = 0; i < numOfWords; i++) {
-                let randomNumber = Math.floor(Math.random() * dictionary.length)
-                if (i == numOfWords-1) {
-                    password += dictionary[randomNumber]
-                } else {
-                    password += dictionary[randomNumber] + "-"
+            getDictionary(dictionary => {
+                for (let i = 0; i < numOfWords; i++) {
+                    let randomNumber = Math.floor(Math.random() * dictionary.length)
+                    if (i == numOfWords-1) {
+                        password += dictionary[randomNumber]
+                    } else {
+                        password += dictionary[randomNumber] + "-"
+                    }
                 }
-            }
-            out.innerText = password
+                out.innerText = password
+            })
+
 
             // Update URL parameters
             searchParams.set('words', d.getElementById('words').value)
@@ -133,13 +135,15 @@
             return password
         }
 
-        function getDictionary() {
+        function getDictionary(callback) {
             // https://eff.org/dice
             // wget https://www.eff.org/files/2016/07/18/eff_large_wordlist.txt
             // cat eff_large_wordlist.txt | awk '{print $2}' > eff.txt
+
+            // https://github.com/first20hours/google-10000-english
             fetch('eff.txt')
-                .then(response => response.body())
-                .then(data => dictionary = data.split('\n'))
+                .then(response => response.text)
+                .then(data => callback(data.split('\n')))
         }
 
         start()
