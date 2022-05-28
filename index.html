@@ -17,37 +17,37 @@
     </form>
     <h2 id="out"></h2>
     <script>
-        const docGetById = document.getElementById
+        const d = document
         const alpha = "abcdefghijklmnopqrstovwxyz"
         const alphaUpper = "ABCDEFGHIJKLMNOPQRSTOVWXYZ"
         const num = "0123456789"
         const specialStr = "~!@#$%^&*()_+-={}[]|;':\",./<>?\\`"
 
         // check url parameter and set defaults
-        const { searchParams } = new URL(document.URL)
+        const { searchParams } = new URL(d.URL)
         if (searchParams.has('numbers')) {
             let value = searchParams.get('numbers').toLowerCase() == 'true' ? true : false;
-            docGetById('numbers').checked = value
+            d.getElementById('numbers').checked = value
         }
         if (searchParams.has('special')) {
             let value = searchParams.get('special').toLowerCase() == 'true' ? true : false;
-            docGetById('special').checked = value
+            d.getElementById('special').checked = value
         }
         if (searchParams.has('length')) {
-            docGetById('length').value = searchParams.get('length')
+            d.getElementById('length').value = searchParams.get('length')
         }
 
         function start() {
-            let numbers = docGetById('numbers').checked
-            let special = docGetById('special').checked
-            let length = docGetById('length').value
-            let out = docGetById('out')
+            let numbers = d.getElementById('numbers').checked
+            let special = d.getElementById('special').checked
+            let length = d.getElementById('length').value
+            let out = d.getElementById('out')
             out.innerText  = genPassword(numbers, special, length)
 
             // Update URL parameters
-            searchParams.set('numbers', docGetById('numbers').checked)
-            searchParams.set('special', docGetById('special').checked)
-            searchParams.set('length', docGetById('length').value)
+            searchParams.set('numbers', d.getElementById('numbers').checked)
+            searchParams.set('special', d.getElementById('special').checked)
+            searchParams.set('length', d.getElementById('length').value)
             history.replaceState(null, '', `${location.pathname}?${searchParams}`)
         }
 
