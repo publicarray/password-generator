@@ -142,7 +142,7 @@
 
             // https://github.com/first20hours/google-10000-english
             fetch('eff.txt')
-                .then(response => response.text)
+                .then(response => response.text())
                 .then(data => callback(data.split('\n')))
         }
 
