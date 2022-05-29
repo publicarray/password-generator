@@ -53,6 +53,8 @@
         <input type="checkbox" name="numbers" id="numbers" checked>
         <label for="special">Special</label>
         <input type="checkbox" name="special" id="special">
+        <label for="emoji">Emoji</label>
+        <input type="checkbox" name="emoji" id="emoji">
         <label for="length">Length</label>
         <input type="number" name="length" id="length" min="1" value="20" max="999999">
     </form>
@@ -64,10 +66,13 @@
     <h2 id="wordsOut"></h2>
     <script>
         const d = document
-        const alpha = "abcdefghijklmnopqrstovwxyz"
-        const alphaUpper = "ABCDEFGHIJKLMNOPQRSTOVWXYZ"
-        const num = "0123456789"
-        const specialStr = "~!@#$%^&*()_+-={}[]|;':\",./<>?\\`"
+        const alpha = [...'abcdefghijklmnopqrstovwxyz']
+        const alphaUpper = [...'ABCDEFGHIJKLMNOPQRSTOVWXYZ']
+        const num = [...'0123456789']
+        const specials = [...'~!@#$%^&*()_+-={}[]|;\':",./<>?\\`']
+        // https://gist.github.com/ikr7/c72843556ef3a12014c3
+        const emojis = [...'😄😃😀😊☺😉😍😘😚😗😙😜😝😛😳😁😔😌😒😞😣😢😂😭😪😥😰😅😓😩😫😨😱😠😡😤😖😆😋😷😎😴😵😲😟😦😧😈👿😮😬😐😕😯😶😇😏😑👲👳👮👷💂👶👦👧👨👩👴👵👱👼👸😺😸😻😽😼🙀😿😹😾👹👺🙈🙉🙊💀👽💩🔥✨🌟💫💥💢💦💧💤💨👂👀👃👅👄👍👎👌👊✊✌👋✋👐👆👇👉👈🙌🙏☝👏💪🚶🏃💃👫👪👬👭💏💑👯🙆🙅💁🙋💆💇💅👰🙎🙍🙇🎩👑👒👟👞👡👠👢👕👔👚👗🎽👖👘👙💼👜👝👛👓🎀🌂💄💛💙💜💚❤💔💗💓💕💖💞💘💌💋💍💎👤👥💬👣💭🐶🐺🐱🐭🐹🐰🐸🐯🐨🐻🐷🐽🐮🐗🐵🐒🐴🐑🐘🐼🐧🐦🐤🐥🐣🐔🐍🐢🐛🐝🐜🐞🐌🐙🐚🐠🐟🐬🐳🐋🐄🐏🐀🐃🐅🐇🐉🐎🐐🐓🐕🐖🐁🐂🐲🐡🐊🐫🐪🐆🐈🐩🐾💐🌸🌷🍀🌹🌻🌺🍁🍃🍂🌿🌾🍄🌵🌴🌲🌳🌰🌱🌼🌐🌞🌝🌚🌑🌒🌓🌔🌕🌖🌗🌘🌜🌛🌙🌍🌎🌏🌋🌌🌠⭐☀⛅☁⚡☔❄⛄🌀🌁🌈🌊🎍💝🎎🎒🎓🎏🎆🎇🎐🎑🎃👻🎅🎄🎁🎋🎉🎊🎈🎌🔮🎥📷📹📼💿📀💽💾💻📱☎📞📟📠📡📺📻🔊🔉🔈🔇🔔🔕📢📣⏳⌛⏰⌚🔓🔒🔏🔐🔑🔎💡🔦🔆🔅🔌🔋🔍🛁🛀🚿🚽🔧🔩🔨🚪🚬💣🔫🔪💊💉💰💴💵💷💶💳💸📲📧📥📤✉📩📨📯📫📪📬📭📮📦📝📄📃📑📊📈📉📜📋📅📆📇📁📂✂📌📎✒✏📏📐📕📗📘📙📓📔📒📚📖🔖📛🔬🔭📰🎨🎬🎤🎧🎼🎵🎶🎹🎻🎺🎷🎸👾🎮🃏🎴🀄🎲🎯🏈🏀⚽⚾🎾🎱🏉🎳⛳🚵🚴🏁🏇🏆🎿🏂🏊🏄🎣☕🍵🍶🍼🍺🍻🍸🍹🍷🍴🍕🍔🍟🍗🍖🍝🍛🍤🍱🍣🍥🍙🍘🍚🍜🍲🍢🍡🍳🍞🍩🍮🍦🍨🍧🎂🍰🍪🍫🍬🍭🍯🍎🍏🍊🍋🍒🍇🍉🍓🍑🍈🍌🍐🍍🍠🍆🍅🌽🏠🏡🏫🏢🏣🏥🏦🏪🏩🏨💒⛪🏬🏤🌇🌆🏯🏰⛺🏭🗼🗾🗻🌄🌅🌃🗽🌉🎠🎡⛲🎢🚢⛵🚤🚣⚓🚀✈💺🚁🚂🚊🚉🚞🚆🚄🚅🚈🚇🚝🚋🚃🚎🚌🚍🚙🚘🚗🚕🚖🚛🚚🚨🚓🚔🚒🚑🚐🚲🚡🚟🚠🚜💈🚏🎫🚦🚥⚠🚧🔰⛽🏮🎰♨🗿🎪🎭📍🚩⬆⬇⬅➡🔠🔡🔤↗↖↘↙↔↕🔄◀▶🔼🔽↩↪ℹ⏪⏩⏫⏬⤵⤴🆗🔀🔁🔂🆕🆙🆒🆓🆖📶🎦🈁🈯🈳🈵🈴🈲🉐🈹🈺🈶🈚🚻🚹🚺🚼🚾🚰🚮🅿♿🚭🈷🈸🈂Ⓜ🛂🛄🛅🛃🉑㊙㊗🆑🆘🆔🚫🔞📵🚯🚱🚳🚷🚸⛔✳❇❎✅✴💟🆚📳📴🅰🅱🆎🅾💠➿♻♈♉♊♋♌♍♎♏♐♑♒♓⛎🔯🏧💹💲💱©®™〽〰🔝🔚🔙🔛🔜❌⭕❗❓❕❔🔃🕛🕧🕐🕜🕑🕝🕒🕞🕓🕟🕔🕠🕕🕖🕗🕘🕙🕚🕡🕢🕣🕤🕥🕦✖➕➖➗♠♥♣♦💮💯✔☑🔘🔗➰🔱🔲🔳◼◻◾◽▪▫🔺⬜⬛⚫⚪🔴🔵🔻🔶🔷🔸🔹']
+
         const dictionary = []
         // check url parameter and set defaults
         const { searchParams } = new URL(d.URL)
@@ -78,6 +83,10 @@
         if (searchParams.has('special')) {
             let value = searchParams.get('special').toLowerCase() == 'true' ? true : false;
             d.getElementById('special').checked = value
+        }
+        if (searchParams.has('emoji')) {
+            let value = searchParams.get('emoji').toLowerCase() == 'true' ? true : false;
+            d.getElementById('emoji').checked = value
         }
         if (searchParams.has('length')) {
             d.getElementById('length').value = searchParams.get('length')
@@ -90,13 +99,15 @@
         function start() {
             let numbers = d.getElementById('numbers').checked
             let special = d.getElementById('special').checked
+            let emoji = d.getElementById('emoji').checked
             let length = d.getElementById('length').value
             let out = d.getElementById('out')
-            out.innerText  = genPassword(numbers, special, length)
+            out.innerText  = genPassword(numbers, special, emoji, length)
 
             // Update URL parameters
             searchParams.set('numbers', d.getElementById('numbers').checked)
             searchParams.set('special', d.getElementById('special').checked)
+            searchParams.set('emoji', d.getElementById('emoji').checked)
             searchParams.set('length', d.getElementById('length').value)
             history.replaceState(null, '', `${location.pathname}?${searchParams}`)
         }
@@ -129,22 +140,41 @@
             return crypto.getRandomValues(new Uint32Array(1))[0] / 0xffffffff
         }
 
+        // function stringFromUTF8Array(data) {
+        //     let str = "";
+        //     for (let i = 0 ; i < data.length; i++) {
+        //         str += String.fromCharCode(data[i]);
+        //     }
+        //     return str;
+        // }
+
         function randomChar (searchSpace) {
             // let randomNumber = Math.floor(Math.random() * searchSpace.length)
             let randomNumber = Math.floor(random() * searchSpace.length)
             return searchSpace[randomNumber]
         }
 
-        function genPassword(numbers, special, length) {
+        function genPassword(numbers, special, emoji, length) {
             let password = ""
-            let searchSpace = alpha + alphaUpper
+            let searchSpace = []
+            searchSpace = searchSpace.concat(alpha)
+            searchSpace = searchSpace.concat(alphaUpper)
             if (numbers) {
-                searchSpace += num
+                searchSpace = searchSpace.concat(num)
             }
             if (special) {
-                searchSpace += specialStr
+                searchSpace = searchSpace.concat(specials)
+            }
+            if (emoji) {
+                searchSpace = searchSpace.concat(emojis)
             }
             for (let i = 0; i < length; i++) {
+                // str = stringFromUTF8Array(crypto.getRandomValues(new Uint32Array(1)))
+                // if (str) {
+                //     password += str
+                // } else {
+                //     i--
+                // }
                 password += randomChar(searchSpace)
             }
             return password
@@ -164,9 +194,9 @@
         start()
         startWords()
 
-    if('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('sw.js')
-    }
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+        }
     </script>
 
 </body>
