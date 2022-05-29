@@ -7,16 +7,16 @@ const files = [
     "/index.html",
     "/manifest.json",
     "/eff.txt",
-    "/apple-icon-57x57.png",
-    "/apple-icon-57x57.avif",
-    "/apple-icon-72x72.png",
-    "/apple-icon-72x72.avif",
-    "/favicon-96x96.png",
-    "/favicon-96x96.avif",
-    "/android-icon-192.192.png",
-    "/android-icon-192.192.avif",
-    "/apple-icon-512x512.png",
-    "/apple-icon-512x512.avif"
+    "/icons/apple-icon-57x57.png",
+    "/icons/apple-icon-57x57.avif",
+    "/icons/apple-icon-72x72.png",
+    "/icons/apple-icon-72x72.avif",
+    "/icons/favicon-96x96.png",
+    "/icons/favicon-96x96.avif",
+    "/icons/android-icon-192.192.png",
+    "/icons/android-icon-192.192.avif",
+    "/icons/apple-icon-512x512.png",
+    "/icons/apple-icon-512x512.avif"
 ]
 
 self.addEventListener("install", (e) => {
@@ -29,8 +29,12 @@ self.addEventListener("install", (e) => {
 
 self.addEventListener('fetch', (e) => {
     e.respondWith((async () => {
-        let response = await caches.match(e.request)
-        return response || await fetch(e.request)
+        const r = await caches.match(e.request)
+        if (r) { return r }
+        const response = await fetch(e.request)
+        const cache = await caches.open(cacheName)
+        cache.put(e.request, response.clone())
+        return response
     })())
 })
 
