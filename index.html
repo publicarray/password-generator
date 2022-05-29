@@ -41,33 +41,60 @@
             color: var(--font-color);
             transition: color ease 0.5s, background ease 0.5s;
         }
+
+        form {
+            display: inline;
+        }
+
         label {
             margin-left: 2rem;
         }
 
-        #out {
+        input {
+            font-size: 1.2rem;
+            min-width: 1.2rem;
+            min-height: 1.2rem;
+        }
+
+        button {
+            min-width: 5rem;
+            min-height: 2rem;
+
+        }
+
+        #out, #wordsOut {
             overflow-wrap: anywhere;
+            font-family: monospace;
+            font-size: xx-large;
+            margin: 2rem;
         }
     </style>
 </head>
 <body>
-    <form action="" method="get" oninput="start()">
-        <label for="numbers">Numbers</label>
-        <input type="checkbox" name="numbers" id="numbers" checked>
-        <label for="special">Special</label>
-        <input type="checkbox" name="special" id="special">
-        <label for="emoji">Emoji</label>
-        <input type="checkbox" name="emoji" id="emoji">
-        <label for="length">Length</label>
-        <input type="number" name="length" id="length" min="1" value="20">
-    </form>
-    <h2 id="out"></h2>
-    <form action="" method="get" oninput="startWords()">
-        <label for="words">Number of Words</label>
-        <input type="number" name="words" id="words" min="1" value="4">
-    </form>
-    <h2 id="wordsOut"></h2>
+    <div id="passwordGen">
+        <form action="" method="get" oninput="start()">
+            <label for="numbers">Numbers</label>
+            <input type="checkbox" name="numbers" id="numbers" checked>
+            <label for="special">Special</label>
+            <input type="checkbox" name="special" id="special">
+            <label for="emoji">Emoji</label>
+            <input type="checkbox" name="emoji" id="emoji">
+            <label for="length">Length</label>
+            <input type="number" name="length" id="length" min="1" value="20">
+        </form>
+        <button onclick="copyPass()">Copy</button>
+        <div id="out"></div>
+    </div>
+    <div id="passphraseGen">
+        <form action="" method="get" oninput="startWords()" id="passphraseGen">
+            <label for="words">Number of Words</label>
+            <input type="number" name="words" id="words" min="1" value="4">
+        </form>
+        <button onclick="copyPhrase()">Copy</button>
+        <div id="wordsOut"></div>
+    </div>
     <script>
+        // other generators: https://1password.com/password-generator/
         const d = document
         const alpha = [...'abcdefghijklmnopqrstovwxyz']
         const alphaUpper = [...'ABCDEFGHIJKLMNOPQRSTOVWXYZ']
@@ -76,18 +103,21 @@
         // https://gist.github.com/ikr7/c72843556ef3a12014c3
         const emojis = [...'😄😃😀😊☺😉😍😘😚😗😙😜😝😛😳😁😔😌😒😞😣😢😂😭😪😥😰😅😓😩😫😨😱😠😡😤😖😆😋😷😎😴😵😲😟😦😧😈👿😮😬😐😕😯😶😇😏😑👲👳👮👷💂👶👦👧👨👩👴👵👱👼👸😺😸😻😽😼🙀😿😹😾👹👺🙈🙉🙊💀👽💩🔥✨🌟💫💥💢💦💧💤💨👂👀👃👅👄👍👎👌👊✊✌👋✋👐👆👇👉👈🙌🙏☝👏💪🚶🏃💃👫👪👬👭💏💑👯🙆🙅💁🙋💆💇💅👰🙎🙍🙇🎩👑👒👟👞👡👠👢👕👔👚👗🎽👖👘👙💼👜👝👛👓🎀🌂💄💛💙💜💚❤💔💗💓💕💖💞💘💌💋💍💎👤👥💬👣💭🐶🐺🐱🐭🐹🐰🐸🐯🐨🐻🐷🐽🐮🐗🐵🐒🐴🐑🐘🐼🐧🐦🐤🐥🐣🐔🐍🐢🐛🐝🐜🐞🐌🐙🐚🐠🐟🐬🐳🐋🐄🐏🐀🐃🐅🐇🐉🐎🐐🐓🐕🐖🐁🐂🐲🐡🐊🐫🐪🐆🐈🐩🐾💐🌸🌷🍀🌹🌻🌺🍁🍃🍂🌿🌾🍄🌵🌴🌲🌳🌰🌱🌼🌐🌞🌝🌚🌑🌒🌓🌔🌕🌖🌗🌘🌜🌛🌙🌍🌎🌏🌋🌌🌠⭐☀⛅☁⚡☔❄⛄🌀🌁🌈🌊🎍💝🎎🎒🎓🎏🎆🎇🎐🎑🎃👻🎅🎄🎁🎋🎉🎊🎈🎌🔮🎥📷📹📼💿📀💽💾💻📱☎📞📟📠📡📺📻🔊🔉🔈🔇🔔🔕📢📣⏳⌛⏰⌚🔓🔒🔏🔐🔑🔎💡🔦🔆🔅🔌🔋🔍🛁🛀🚿🚽🔧🔩🔨🚪🚬💣🔫🔪💊💉💰💴💵💷💶💳💸📲📧📥📤✉📩📨📯📫📪📬📭📮📦📝📄📃📑📊📈📉📜📋📅📆📇📁📂✂📌📎✒✏📏📐📕📗📘📙📓📔📒📚📖🔖📛🔬🔭📰🎨🎬🎤🎧🎼🎵🎶🎹🎻🎺🎷🎸👾🎮🃏🎴🀄🎲🎯🏈🏀⚽⚾🎾🎱🏉🎳⛳🚵🚴🏁🏇🏆🎿🏂🏊🏄🎣☕🍵🍶🍼🍺🍻🍸🍹🍷🍴🍕🍔🍟🍗🍖🍝🍛🍤🍱🍣🍥🍙🍘🍚🍜🍲🍢🍡🍳🍞🍩🍮🍦🍨🍧🎂🍰🍪🍫🍬🍭🍯🍎🍏🍊🍋🍒🍇🍉🍓🍑🍈🍌🍐🍍🍠🍆🍅🌽🏠🏡🏫🏢🏣🏥🏦🏪🏩🏨💒⛪🏬🏤🌇🌆🏯🏰⛺🏭🗼🗾🗻🌄🌅🌃🗽🌉🎠🎡⛲🎢🚢⛵🚤🚣⚓🚀✈💺🚁🚂🚊🚉🚞🚆🚄🚅🚈🚇🚝🚋🚃🚎🚌🚍🚙🚘🚗🚕🚖🚛🚚🚨🚓🚔🚒🚑🚐🚲🚡🚟🚠🚜💈🚏🎫🚦🚥⚠🚧🔰⛽🏮🎰♨🗿🎪🎭📍🚩⬆⬇⬅➡🔠🔡🔤↗↖↘↙↔↕🔄◀▶🔼🔽↩↪ℹ⏪⏩⏫⏬⤵⤴🆗🔀🔁🔂🆕🆙🆒🆓🆖📶🎦🈁🈯🈳🈵🈴🈲🉐🈹🈺🈶🈚🚻🚹🚺🚼🚾🚰🚮🅿♿🚭🈷🈸🈂Ⓜ🛂🛄🛅🛃🉑㊙㊗🆑🆘🆔🚫🔞📵🚯🚱🚳🚷🚸⛔✳❇❎✅✴💟🆚📳📴🅰🅱🆎🅾💠➿♻♈♉♊♋♌♍♎♏♐♑♒♓⛎🔯🏧💹💲💱©®™〽〰🔝🔚🔙🔛🔜❌⭕❗❓❕❔🔃🕛🕧🕐🕜🕑🕝🕒🕞🕓🕟🕔🕠🕕🕖🕗🕘🕙🕚🕡🕢🕣🕤🕥🕦✖➕➖➗♠♥♣♦💮💯✔☑🔘🔗➰🔱🔲🔳◼◻◾◽▪▫🔺⬜⬛⚫⚪🔴🔵🔻🔶🔷🔸🔹']
 
-        // check url parameter and set defaults
+        // check url parameter and set values
         const { searchParams } = new URL(d.URL)
         if (searchParams.has('numbers')) {
-            let value = searchParams.get('numbers').toLowerCase() == 'true' ? true : false;
+            let value = searchParams.get('numbers').toLowerCase()
+            value = (value == 'true' || value == 'on') ? true : false
             d.getElementById('numbers').checked = value
         }
         if (searchParams.has('special')) {
-            let value = searchParams.get('special').toLowerCase() == 'true' ? true : false;
+            let value = searchParams.get('special').toLowerCase()
+            value = (value == 'true' || value == 'on') ? true : false
             d.getElementById('special').checked = value
         }
         if (searchParams.has('emoji')) {
-            let value = searchParams.get('emoji').toLowerCase() == 'true' ? true : false;
+            let value = searchParams.get('emoji').toLowerCase()
+            value = (value == 'true' || value == 'on') ? true : false
             d.getElementById('emoji').checked = value
         }
         if (searchParams.has('length')) {
@@ -192,6 +222,14 @@
                 .then(response => response.text())
                 .then(data => callback(data.split('\n')))
         }
+
+        let copyPass = () => {
+            navigator.clipboard.writeText(d.getElementById('out').innerText)
+        }
+        let copyPhrase = () => {
+            navigator.clipboard.writeText(d.getElementById('wordsOut').innerText)
+        }
+
 
         start()
         startWords()
